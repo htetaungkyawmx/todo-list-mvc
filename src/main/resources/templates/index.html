@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+          th:href="@{/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-danger text-lg-center">
+    <div class="container">
+        <a href="#" class="navbar-brand">ToDoList</a>
+        <button class="navbar-toggler" type="button" data-bs-target="#myNav" data-bs-toggler="collapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="myNav" class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Contact US</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</nav>
+
+<div class="container">
+    <div class="mt-5">
+        <ul class="list-group" th:each="item :${todoItems}">
+            <li class="list-group-item" th:text="${item.name}"></li>
+        </ul>
+    </div>
+
+    <hr class="my-5">
+
+    <form th:object="${todoItem}" th:action="@{/save-todo}" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control"
+                   th:field="*{name}" id="name"
+                   th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'"
+            >
+            <small th:if="${#fields.hasErrors('name')}" class="invalid-feedback"
+                   th:errors="*{name}"></small>
+        </div>
+        <input type="submit" value="Add Todo" class="btn btn-primary">
+    </form>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>
